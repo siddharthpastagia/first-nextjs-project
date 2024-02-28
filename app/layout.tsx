@@ -1,7 +1,13 @@
+import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const links = [
+  {href:'/',label:'Home'},
+  {href:'/toDo',label:'To Do'},
+  {href:'/docs',label:'Docs'}
+]
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +21,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <header>
+          <nav className='mb-10'>
+            <ul className='flex items-center space-x-2 border divide-solid cursor-pointer'>
+              {links.map((link)=> (
+                <li key={link.href} className='divide-dotted cursor-pointer'>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </header>
+        {children}
+      </body>
     </html>
   )
 }
